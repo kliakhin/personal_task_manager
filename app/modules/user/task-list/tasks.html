@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <th>#</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Deadline</th>
+            </thead>
+            <tr ng-repeat="task in ctrl.taskList">
+                <td>{{$index}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.body}}</td>
+                <td>{{task.deadline}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <a href class="btn btn-success" ui-sref="app.user.createTask.index">Add task</a>
+        </div>
+    </div>
+</div>
