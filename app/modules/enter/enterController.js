@@ -3,6 +3,7 @@
 export default class EnterController {
     constructor(enterService, $state, $window) {
         'ngInject';
+
         this.$state = $state;
         this.$window = $window;
         this.enterService = enterService;
@@ -24,6 +25,6 @@ export default class EnterController {
 
     logout() {
         this.enterService.logout();
-        this.$state.go('app.home');
+        this.$state.go(this.$state.current, {}, {reload:true});
     }
 }

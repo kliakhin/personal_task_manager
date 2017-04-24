@@ -34,5 +34,16 @@ export default class StorageService {
         return this.usersDB;
     }
 
+    saveCurrentUser(userFromDB) {
+        this.$window.localStorage.setItem("currentUser", JSON.stringify(userFromDB));
+    }
+
+    deleteCurrentUser() {
+        this.$window.localStorage.removeItem("currentUser");
+    }
+
+    getCurrentUser() {
+        return JSON.parse(this.$window.localStorage.getItem("currentUser"));
+    }
 
 }

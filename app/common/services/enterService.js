@@ -5,7 +5,6 @@ export default class EnterService {
         'ngInject';
         this.$state = $state;
         this.storageService = storageService;
-        this.loggined = false;
         this.userName = "";
         this.users = storageService.getUsersFromDB();
     }
@@ -23,17 +22,19 @@ export default class EnterService {
         if (userFromDB != null && userFromDB.password === user.password) {
             this.loggined = true;
             this.userName = userFromDB.firstName;
+            this.storageService.saveCurrentUser(userFromDB);
         } else {
             console.log("Not found");
         }
     }
 
     logout() {
-        this.loggined = false;
+        this.storageService.deleteCurrentUser();
         this.$state.go('app.home');
     }
 
     isLoggined() {
-        return this.loggined;
+        let user = this.storageService.getCurrentUser();
+        return user != null;
     }
 }
