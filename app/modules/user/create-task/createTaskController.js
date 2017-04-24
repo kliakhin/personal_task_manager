@@ -17,7 +17,6 @@ export default class CreateTaskController{
 	}
 
 	addTask(){
-		console.log(this.task);
 		let task = this.task;
 		this.taskService.addTask(task);
 	}

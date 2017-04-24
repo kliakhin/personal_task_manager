@@ -13,7 +13,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li ui-sref-active="active" ng-if="!ctrl.isLoggined()"><a ui-sref="app.enter.register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li ui-sref-active="active" ng-if="!ctrl.isLoggined()"><a ui-sref="app.enter.in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li ui-sref-active="active" ng-if="ctrl.isLoggined()"><a ui-sref="app.enter.out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li ui-sref-active="active" ng-if="ctrl.isLoggined()" ng-click="ctrl.logout()"><a ui-sref="app.enter.out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>

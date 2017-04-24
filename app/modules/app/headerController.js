@@ -16,4 +16,8 @@ export default class HeaderController{
 		return this.enterService.isLoggined();
 	}
 
+	logout() {
+		this.enterService.logout();
+	}
+
 }

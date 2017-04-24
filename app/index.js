@@ -9,6 +9,7 @@ import uiBootstrap from 'angular-ui-bootstrap';
 import routeConfig from './common/config/routeConfig.js';
 import taskService from './common/services/taskService.js';
 import enterService from './common/services/enterService.js';
+import storageService from './common/services/storageService.js';
 import userModule from './modules/user';
 import enterModule from './modules/enter';
 import homeModule from './modules/home';
@@ -25,7 +26,8 @@ angular.module('app', [
 ])
     .config(routeConfig)
     .service('taskService', taskService)
-    .service('enterService', enterService);
+    .service('enterService', enterService)
+    .service('storageService', storageService);
 
 
 

@@ -1,4 +1,42 @@
-<div class="container-fluid">
-    <h1>Sing Up page</h1>
-    <button ng-click="ctrl.register()">Sign Up</button>
+<div class="col-xs-9">
+    <h1>Registration Form</h1>
+
+    <form ng-submit="ctrl.register()">
+        <div class="form-group">
+            <input type="email"
+                   ng-model="ctrl.user.email"
+                   class="form-control"
+                   ng-required="true"
+                   placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="password"
+                   ng-model="ctrl.user.password"
+                   class="form-control"
+                   ng-required="false"
+                   placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input type="password"
+                   ng-model="ctrl.user.passwordRepeat"
+                   class="form-control"
+                   ng-required="false"
+                   placeholder="Repeat Password">
+        </div>
+        <div class="form-group">
+            <input type="text"
+                   ng-model="ctrl.user.firstName"
+                   class="form-control"
+                   ng-required="false"
+                   placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <input type="text"
+                   ng-model="ctrl.user.lastName"
+                   class="form-control"
+                   ng-required="false"
+                   placeholder="Last Name">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
 </div>
