@@ -1,8 +1,9 @@
 <div>
-	<h1>Home page</h1>
-	<h1 ng-if="ctrl.userName">Hello {{ctrl.userName}}</h1>
-	<button ng-click="ctrl.showPersonName()">show</button>
-	<button ng-click="ctrl.clear()">clear</button>
+    <h1>Home page</h1>
+    <h1 ng-if="ctrl.currentUser.firstName">Hello {{ctrl.currentUser.firstName}}</h1>
+    <button ng-click="ctrl.showUsers()">show users</button>
+    <button ng-click="ctrl.showTasks()">show tasks</button>
+    <button ng-click="ctrl.clear()">clear</button>
 </div>
 
 

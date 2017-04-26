@@ -5,36 +5,64 @@ export default class EnterService {
         'ngInject';
         this.$state = $state;
         this.storageService = storageService;
-        this.userName = "";
-        this.users = storageService.getUsersFromDB();
+        this.currentUser = storageService.getCurrentUser();
     }
 
-    createNewUser(user) {
-        if (this.storageService.getUserByEmail(user.email) == null) {
-            this.storageService.addUser(user);
+    createNewUser(newUser) {
+        if (!this.isUserExists(newUser)) {
+            this.storageService.createUser(newUser);
         } else {
-            console.log("Already exists");
+            console.log("Already Exists");
         }
     }
 
-    login(user) {
-        var userFromDB = this.storageService.getUserByEmail(user.email);
-        if (userFromDB != null && userFromDB.password === user.password) {
-            this.loggined = true;
-            this.userName = userFromDB.firstName;
-            this.storageService.saveCurrentUser(userFromDB);
+    login(checkUser) {
+        var usersList = this.storageService.getUsersList();
+        if (usersList != null) {
+            var user = usersList.find(function (item) {
+                if (item.email === checkUser.email && item.password === checkUser.password) {
+                    return item;
+                }
+            });
+            if (user != null) {
+                this.currentUser = user;
+                this.storageService.createCurrentUser(user);
+            } else {
+                console.log("User not found");
+            }
         } else {
-            console.log("Not found");
+            console.log("User not found");
         }
     }
 
     logout() {
         this.storageService.deleteCurrentUser();
+        this.currentUser = null;
         this.$state.go('app.home');
     }
 
     isLoggined() {
-        let user = this.storageService.getCurrentUser();
-        return user != null;
+        return this.currentUser != null;
+    }
+
+    isUserExists(newUser) {
+        var users = this.storageService.getUsersList();
+        if (users == null) {
+            return false;
+        }
+        var user = users.find(function (item) {
+            if (item.email === newUser.email) {
+                return item;
+            }
+        });
+        if (user != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    getCurrentUser() {
+        return this.currentUser;
     }
 }

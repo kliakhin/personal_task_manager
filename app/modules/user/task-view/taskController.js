@@ -7,7 +7,7 @@ export default class TaskController{
 		this.task = task;
 
 		if(!this.task){
-			$state.go('app.user.tasks');
+			$state.go('app.user.tasksList');
 		}
 	}
 

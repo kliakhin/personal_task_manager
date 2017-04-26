@@ -1,11 +1,10 @@
 'use strict';
 
 export default class EnterController {
-    constructor(enterService, $state, $window) {
+    constructor(enterService, $state) {
         'ngInject';
 
         this.$state = $state;
-        this.$window = $window;
         this.enterService = enterService;
         this.user = {};
     }
@@ -18,13 +17,12 @@ export default class EnterController {
 
     register() {
         let user = this.user;
-        console.log("user from ctrl", user);
         this.enterService.createNewUser(user);
-        this.$state.go('app.home');
+        this.$state.go('app.enter.in');
     }
 
     logout() {
         this.enterService.logout();
-        this.$state.go(this.$state.current, {}, {reload:true});
+        this.$state.go(this.$state.current, {}, {reload: true});
     }
 }

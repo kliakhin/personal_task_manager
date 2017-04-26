@@ -1,18 +1,26 @@
 'use strict';
 
 export default class HomeController {
-    constructor($scope, $window, enterService) {
+    constructor(enterService, localStorageService) {
         'ngInject';
-        this.$window = $window;
-        this.userName = enterService.userName;
+        this.currentUser = enterService.getCurrentUser();
+        this.localStorageService = localStorageService;
 
     }
 
-    showPersonName(name) {
-        console.log(this.$window.localStorage.getItem("users"));
+    showUsers() {
+        console.log("Users", this.localStorageService.get("users"))
+    }
+
+    showTasks() {
+        if (this.currentUser != null) {
+            console.log("Tasks", this.localStorageService.get(this.currentUser.email))
+        } else {
+            console.log("Log in");
+        }
     }
 
     clear() {
-        this.$window.localStorage.removeItem("users");
+        this.localStorageService.clearAll();
     }
 }

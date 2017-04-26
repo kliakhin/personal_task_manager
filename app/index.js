@@ -6,6 +6,8 @@ import uiMask from 'angular-ui-mask';
 
 import uiBootstrap from 'angular-ui-bootstrap';
 
+import localStorage from 'angular-local-storage';
+
 import routeConfig from './common/config/routeConfig.js';
 import taskService from './common/services/taskService.js';
 import enterService from './common/services/enterService.js';
@@ -19,10 +21,11 @@ angular.module('app', [
     uiRouter,
     uiMask,
     uiBootstrap,
+    localStorage,
     rootModule.name,
     homeModule.name,
     userModule.name,
-    enterModule.name,
+    enterModule.name
 ])
     .config(routeConfig)
     .service('taskService', taskService)

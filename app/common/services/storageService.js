@@ -1,49 +1,80 @@
 'use strict';
-
 export default class StorageService {
-    constructor($window) {
-        this.$window = $window;
-        this.usersDB = [];
+
+    constructor(localStorageService) {
+        'ngInject';
+        this.localStorageService = localStorageService;
+        this.users = [];
+        this.tasks = [];
     }
 
-    addUser(user) {
-        this.usersDB.push(user);
-        this.$window.localStorage.setItem("users", JSON.stringify(this.usersDB));
-    }
-
-    getUserByEmail(email) {
-        return this.usersDB.find(function (item) {
-            if (item.email === email) {
-                return item;
-            }
-        });
-    }
-
-    getUsersFromDB() {
-        if (this.$window.localStorage.getItem("users") == null) {
-            let user = {
-                email: "test@test.com",
-                password: "123456",
-                firstName: "Test Name",
-                lastName: "Test LastName"
-            };
-            this.usersDB.push(user);
-        } else {
-            this.usersDB = JSON.parse(this.$window.localStorage.getItem("users"));
+    init() {
+        this.users = this.localStorageService.get("users");
+        if (this.getCurrentUser() != null) {
+            this.tasks = this.localStorageService.get(this.getCurrentUser().email);
         }
-        return this.usersDB;
+        if (this.users == null) {
+            this.users = [];
+        }
+        if (this.tasks == null) {
+            this.tasks = [];
+        }
+
     }
 
-    saveCurrentUser(userFromDB) {
-        this.$window.localStorage.setItem("currentUser", JSON.stringify(userFromDB));
+    sync() {
+        this.localStorageService.set("users", this.users);
+        if (this.getCurrentUser() != null) {
+            this.localStorageService.set(this.getCurrentUser().email, this.tasks);
+        }
+    }
+
+    createTask(task) {
+        this.tasks.push(task);
+        this.sync();
+    }
+
+    getTasksList() {
+        this.init();
+        return this.tasks;
+    }
+
+    updateTask(task) {
+
+    }
+
+    deleteTask(task) {
+
+    }
+
+    createUser(user) {
+        this.init();
+        this.users.push(user);
+        this.sync();
+    }
+
+    getUsersList() {
+        this.init();
+        return this.users;
+    }
+
+    updateUser() {
+
+    }
+
+    deleteUser(user) {
+
+    }
+
+    createCurrentUser(user) {
+        this.localStorageService.set("currentUser", user);
     }
 
     deleteCurrentUser() {
-        this.$window.localStorage.removeItem("currentUser");
+        this.localStorageService.remove("currentUser");
     }
 
     getCurrentUser() {
-        return JSON.parse(this.$window.localStorage.getItem("currentUser"));
+        return this.localStorageService.get("currentUser");
     }
-
 }

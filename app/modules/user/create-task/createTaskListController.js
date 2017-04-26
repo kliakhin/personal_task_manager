@@ -5,10 +5,10 @@ export default class CreateTaskListController{
 		'ngInject';
 
 		this.taskService = taskService;
-		this.tasks = taskService.getTasksList();
+		this.tasksList = taskService.getTasksList();
 
 		$scope.$on('TASK_ADDED', (event)=>{
-			this.tasks = taskService.getTasksList();
+			this.tasksList = taskService.getTasksList();
 		});
 	}
 
