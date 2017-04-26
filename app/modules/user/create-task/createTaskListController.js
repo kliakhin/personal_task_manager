@@ -3,7 +3,6 @@
 export default class CreateTaskListController{
 	constructor(taskService, $scope){
 		'ngInject';
-
 		this.taskService = taskService;
 		this.tasksList = taskService.getTasksList();
 

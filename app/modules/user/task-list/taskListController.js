@@ -1,21 +1,27 @@
 'use strict';
 
-export default class UserListController{
-	constructor(taskService, enterService, $state){
-		'ngInject';
+export default class TaskListController {
+    constructor(taskModalService, taskService, enterService, $state, $scope) {
+        'ngInject';
 
-		this.taskList = taskService.getTasksList();
-		this.enterService = enterService;
-		this.$state = $state;
-		this._isLoggined();
+        this.taskList = taskService.getTasksList();
+        this.enterService = enterService;
+        this.$state = $state;
+        this.taskModalService = taskModalService;
 
-	}
+        $scope.$on('TASK_ADDED', (event)=> {
+            this.taskList = taskService.getTasksList();
+        });
+    }
 
-	_isLoggined(){
-		if (!this.enterService.isLoggined()){
-			this.$state.go('app.home');
-		}
-	}
+    createNewTask() {
+        this.taskModalService.createTaskModal();
+    }
+
+    markAsDone(index) {
+        var task = this.taskList[index];
+
+    }
 }
 
 

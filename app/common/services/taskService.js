@@ -5,21 +5,16 @@ export default class TaskService {
         'ngInject';
         this.$rootScope = $rootScope;
         this.storageService = storageService;
-        this.tasksList = storageService.getTasks();
+        this.tasksList = storageService.getTasksList();
     }
 
-    addTask(task) {
-        this.tasksList.push(task);
-        this.storageService.saveTasks(this.tasksList);
+    createTask(task) {
+        this.storageService.createTask(task);
         this.$rootScope.$broadcast('TASK_ADDED', 0, 1, 2);
     }
 
     getTasksList() {
-        console.log(this.tasksList);
+        console.log("tasks", this.tasksList);
         return angular.copy(this.tasksList);
-       }
-
-    loadTasksList() {
-        return this.tasksList;
     }
 }

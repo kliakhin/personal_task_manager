@@ -2,16 +2,20 @@
     <div class="row">
         <table class="table">
             <thead>
-            <th>#</th>
+            <th>Done</th>
             <th>Title</th>
             <th>Body</th>
             <th>Deadline</th>
+            <th>Group</th>
+            <th>Priority</th>
             </thead>
             <tr ng-repeat="task in ctrl.taskList">
-                <td>{{$index}}</td>
+                <td><input type="checkbox" ng-click="ctrl.markAsDone($index)"></td>
                 <td>{{task.title}}</td>
                 <td>{{task.body}}</td>
                 <td>{{task.deadline}}</td>
+                <td>{{task.group}}</td>
+                <td>{{task.priority}}</td>
             </tr>
         </table>
     </div>
@@ -20,4 +24,6 @@
             <a href class="btn btn-success" ui-sref="app.user.createTask.index">Add task</a>
         </div>
     </div>
+
+    <button ng-click="ctrl.createNewTask()">Create</button>
 </div>
