@@ -5,15 +5,23 @@
         </div>
         <ul class="nav navbar-nav">
 
-            <li ui-sref-active="active"><a ui-sref="app.home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-            <li ui-sref-active="active" ng-if="ctrl.isLoggined()"><a ui-sref="app.user.tasks.index"><span class="glyphicon glyphicon-list-alt"></span>Tasks</a></li>
-            <li ui-sref-active="active" ng-if="ctrl.isLoggined()"><a ui-sref="app.user.createTask.index"><span class="glyphicon glyphicon-plus-sign"></span>New Task</a></li>
+            <li ui-sref-active="active"><a ui-sref="app.home"><span class="glyphicon glyphicon-home"></span>Home</a>
+            </li>
+            <li ui-sref-active="active" ng-if="ctrl.isLoggined()"><a ui-sref="app.user.tasks.index"><span
+                    class="glyphicon glyphicon-list-alt"></span>Tasks</a></li>
+            <li ui-sref-active="active" ng-if="ctrl.isLoggined()"><a ui-sref="app.user.createTask.index"><span
+                    class="glyphicon glyphicon-plus-sign"></span>New Task</a></li>
+            <li ui-sref-active="active" ng-if="ctrl.isLoggined()" ng-click="ctrl.createGroup()"><a><span
+                    class="glyphicon glyphicon-plus"></span>New Group</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li ui-sref-active="active" ng-if="!ctrl.isLoggined()"><a ui-sref="app.enter.register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li ui-sref-active="active" ng-if="!ctrl.isLoggined()"><a ui-sref="app.enter.in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li ui-sref-active="active" ng-if="ctrl.isLoggined()" ng-click="ctrl.logout()"><a ui-sref="app.enter.out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li ui-sref-active="active" ng-if="!ctrl.isLoggined()"><a ui-sref="app.enter.register"><span
+                    class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li ui-sref-active="active" ng-if="!ctrl.isLoggined()"><a ui-sref="app.enter.in"><span
+                    class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li ui-sref-active="active" ng-if="ctrl.isLoggined()" ng-click="ctrl.logout()"><a
+                    ui-sref="app.enter.out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>

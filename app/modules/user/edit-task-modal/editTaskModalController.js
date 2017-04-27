@@ -9,7 +9,7 @@ export default class EditTaskModalController {
         this.popup = {
             opened: false
         };
-        this.groups = ["Work", "Home", "Other"];
+        this.groups = taskService.getGroupsList();
         this.priorities = ["Low", "Middle", "High"]
     }
 

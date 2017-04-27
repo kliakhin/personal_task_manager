@@ -7,6 +7,8 @@ import createTaskModalTemplate from './create-task-modal/create-task-modal.html'
 import createTaskModalController from './create-task-modal/createTaskModalController.js';
 import editTaskModalTemplate from './edit-task-modal/edit-task-modal.html';
 import editTaskModalController from './edit-task-modal/editTaskModalController.js';
+import createGroupModalTemplate from './create-group-modal/create-group-modal.html';
+import createGroupModalController from './create-group-modal/createGroupModalController.js';
 
 export default class TaskModalService {
     constructor($uibModal) {
@@ -32,6 +34,15 @@ export default class TaskModalService {
             resolve: {
                 task: task
             }
+        });
+        return modalInstance.result;
+    }
+
+    createGroupModal() {
+        let modalInstance = this.$uibModal.open({
+            template: createGroupModalTemplate,
+            controller: createGroupModalController,
+            controllerAs: 'ctrl',
         });
         return modalInstance.result;
     }

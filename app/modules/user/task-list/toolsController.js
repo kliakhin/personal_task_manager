@@ -10,7 +10,7 @@ export default class ToolsController {
         this.filter = {};
         this.tasksList = taskService.getTasksList();
         this.statuses = ["All", "Done", "To do"];
-        this.groups = ["", "Work", "Home", "Other"];
+        this.groups = taskService.getGroupsList();
         this.priorities = ["", "Low", "Middle", "High"];
         this.popupStart = {
             opened: false
@@ -24,7 +24,7 @@ export default class ToolsController {
     apply() {
         var filteredTasks = this.tasksList;
         var filter = this.filter;
-        if (filter.status != null) {
+        if (filter.status != null && filter.status.length > 0) {
             if (filter.status == "Done") {
                 filteredTasks = filteredTasks.filter(function (item) {
                     return item.done == true;
@@ -35,35 +35,22 @@ export default class ToolsController {
                 })
             }
         }
-        if (filter.group != null) {
-            if (filter.group == "Work") {
-                filteredTasks = filteredTasks.filter(function (item) {
-                    return item.group == "Work";
-                })
-            } else if (filter.group == "Home") {
-                filteredTasks = filteredTasks.filter(function (item) {
-                    return item.group == "Home";
-                })
-            } else if (filter.group == "Other") {
-                filteredTasks = filteredTasks.filter(function (item) {
-                    return item.group == "Other";
-                })
-            }
+        if (filter.group != null && filter.group.length > 0) {
+            var group = this.groups.find(function (item) {
+                return item == filter.group;
+            });
+            filteredTasks = filteredTasks.filter(function (item) {
+                return item.group == group;
+            });
         }
-        if (filter.priority != null) {
-            if (filter.priority == "Low") {
-                filteredTasks = filteredTasks.filter(function (item) {
-                    return item.priority == "Low";
-                })
-            } else if (filter.priority == "Middle") {
-                filteredTasks = filteredTasks.filter(function (item) {
-                    return item.priority == "Middle";
-                })
-            } else if (filter.priority == "High") {
-                filteredTasks = filteredTasks.filter(function (item) {
-                    return item.priority == "High";
-                })
-            }
+
+        if (filter.priority != null && filter.priority.length > 0) {
+            var priority = this.priorities.find(function (item) {
+                return item == filter.priority;
+            });
+            filteredTasks = filteredTasks.filter(function (item) {
+                return item.priority == priority;
+            });
         }
         if (filter.start != null) {
             filteredTasks = filteredTasks.filter(function (item) {

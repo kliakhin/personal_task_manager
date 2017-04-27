@@ -1,7 +1,7 @@
 'use strict';
 
 export default class HeaderController{
-	constructor($state, enterService){
+	constructor($state, enterService, taskModalService){
 		'ngInject';
 
 		let states = $state.get();
@@ -10,6 +10,7 @@ export default class HeaderController{
 			return state.title;
 		});
 		this.enterService = enterService;
+		this.taskModalService = taskModalService;
 	}
 
 	isLoggined() {
@@ -18,6 +19,10 @@ export default class HeaderController{
 
 	logout() {
 		this.enterService.logout();
+	}
+
+	createGroup() {
+		this.taskModalService.createGroupModal();
 	}
 
 }

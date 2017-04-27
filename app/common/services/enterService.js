@@ -55,11 +55,7 @@ export default class EnterService {
                 return item;
             }
         });
-        if (user != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return user != null;
     }
 
     getCurrentUser() {

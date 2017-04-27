@@ -5,39 +5,64 @@ export default class StorageService {
         'ngInject';
         this.localStorageService = localStorageService;
         this.users = [];
+        this.user = {};
         this.tasks = [];
+        this.groups = ["", "Work", "Home", "Other"];
     }
 
     init() {
         this.users = this.localStorageService.get("users");
         if (this.getCurrentUser() != null) {
-            this.tasks = this.localStorageService.get(this.getCurrentUser().email);
+            this.user = this.localStorageService.get(this.getCurrentUser().email);
+            if (this.user != null) {
+                this.tasks = this.user.tasks;
+                this.groups = this.user.groups;
+            } else {
+                this.user = {
+                    tasks: [],
+                    groups: ["", "Work", "Home", "Other"]
+                };
+            }
         }
         if (this.users == null) {
             this.users = [];
         }
-        if (this.tasks == null) {
-            this.tasks = [];
+        if (this.user != null) {
+            if (this.user.tasks == null) {
+                this.tasks = [];
+            }
         }
-
     }
 
     sync() {
         this.localStorageService.set("users", this.users);
         if (this.getCurrentUser() != null) {
-            this.localStorageService.set(this.getCurrentUser().email, this.tasks);
+            this.user.tasks = this.tasks;
+            this.user.groups = this.groups;
+            this.localStorageService.set(this.getCurrentUser().email, this.user);
         }
     }
 
-    createTask(task) {
-        task.id = this.generateUUID();
-        this.tasks.push(task);
+
+    createTask(tasks) {
+        this.tasks = tasks;
+        this.sync();
+    }
+
+
+    createGroup(group) {
+        this.groups.push(group);
         this.sync();
     }
 
     getTasksList() {
         this.init();
         return this.tasks;
+    }
+
+    getGroupsList() {
+        this.init();
+        return this.groups;
     }
 
     updateTask(editedTask) {
@@ -50,12 +75,8 @@ export default class StorageService {
         this.sync();
     }
 
-    deleteTask(task) {
-        for (var i = 0; i < this.tasks.length; i++) {
-            if (this.tasks[i].id == task.id) {
-                this.tasks.splice(i, 1);
-            }
-        }
+    deleteTask(tasks) {
+        this.tasks = tasks;
         this.sync();
     }
 
@@ -90,15 +111,7 @@ export default class StorageService {
         return this.localStorageService.get("currentUser");
     }
 
-    generateUUID() { // Public Domain/MIT
-        var d = new Date().getTime();
-        if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
-            d += performance.now(); //use high-precision timer if available
-        }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
+    setFilteredTasks(tasks) {
+        this.tasks = tasks;
     }
 }

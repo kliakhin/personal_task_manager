@@ -1,7 +1,7 @@
 'use strict';
 
 export default class CreateTaskController {
-    constructor(taskService, enterService, $state) {
+    constructor(taskService, enterService, $state, $scope) {
         'ngInject';
         this.taskService = taskService;
         this.enterService = enterService;
@@ -10,8 +10,12 @@ export default class CreateTaskController {
         this.popup = {
             opened: false
         };
-        this.groups = ["Work", "Home", "Other"];
+        this.groups = taskService.getGroupsList();
         this.priorities = ["Low", "Middle", "High"]
+
+        $scope.$on('GROUP_ADDED', (event)=> {
+            this.groups = taskService.getGroupsList();
+        });
     }
 
 
