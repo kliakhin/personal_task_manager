@@ -9,12 +9,18 @@ export default class TaskService {
     }
 
     createTask(task) {
+        task.done = false;
         this.storageService.createTask(task);
         this.$rootScope.$broadcast('TASK_ADDED', 0, 1, 2);
     }
 
+    updateTask(task) {
+        this.storageService.updateTask(task);
+        this.$rootScope.$broadcast('TASK_UPDATED', 0, 1, 2);
+
+    }
+
     getTasksList() {
-        console.log("tasks", this.tasksList);
         return angular.copy(this.tasksList);
     }
 }

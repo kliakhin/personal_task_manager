@@ -2,7 +2,8 @@
 
 import CreateTaskCtrl from './create-task/createTaskController.js';
 import TaskListCtrl from './task-list/taskListController.js';
-import TaskCtrl from './task-view/taskController.js';
+import ToolsCtrl from './task-list/toolsController.js';
+import SettingsCtrl from './task-list/settingsController.js';
 
 import CreateTaskListCtrl from './create-task/createTaskListController.js';
 
@@ -10,8 +11,12 @@ import userTemplate from './user.html';
 import createTaskTemplate from './create-task/create-task.html';
 import createTaskFormTemplate from './create-task/task-form.html';
 import taskListTemplate from './task-list/tasks.html';
-import taskTemplate from './task-view/task.html';
 import createTaskListTemplate from './create-task/task-list.html';
+
+import tasksMainPageTemplate from './task-list/tasksMainPage.html';
+import toolsTemplate from './task-list/tools.html';
+import settingsTemplate from './task-list/settings.html';
+
 
 export default ($stateProvider)=> {
     'ngInject';
@@ -39,10 +44,29 @@ export default ($stateProvider)=> {
         })
         .state('app.user.tasks', {
             url: '/task-list',
+            abstract: true,
+            template: tasksMainPageTemplate
+        })
+        .state('app.user.tasks.index', {
+            url: '',
             title: 'Tasks list',
-            template: taskListTemplate,
-            controller: TaskListCtrl,
-            controllerAs: 'ctrl'
+            views: {
+                'tools': {
+                    template: toolsTemplate,
+                    controller: ToolsCtrl,
+                    controllerAs: 'ctrl'
+                },
+                'list': {
+                    template: taskListTemplate,
+                    controller: TaskListCtrl,
+                    controllerAs: 'ctrl'
+                },
+                'settings': {
+                    template: settingsTemplate,
+                    controller: SettingsCtrl,
+                    controllerAs: 'ctrl'
+                }
+            },
         })
         .state('app.user.createTask', {
             url: '/task-create',
@@ -62,26 +86,6 @@ export default ($stateProvider)=> {
                     controller: CreateTaskListCtrl,
                     controllerAs: 'ctrl',
                     template: createTaskListTemplate
-                }
-            }
-        })
-        .state('app.user.viewTask', {
-            url: '/task-list/:taskId',
-            template: taskTemplate,
-            controller: TaskCtrl,
-            controllerAs: 'ctrl',
-            resolve: {
-                task: ($stateParams, tasks, taskService, $state) => {
-                    'ngInject';
-
-                    let id = $stateParams.taskId;
-                    let task = taskService.getTask(id, tasks);
-
-                    if (!task) {
-                        return $state.go('app.home');
-                    }
-
-                    return task;
                 }
             }
         });

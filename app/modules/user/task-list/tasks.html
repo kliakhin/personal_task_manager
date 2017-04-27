@@ -10,20 +10,23 @@
             <th>Priority</th>
             </thead>
             <tr ng-repeat="task in ctrl.taskList">
-                <td><input type="checkbox" ng-click="ctrl.markAsDone($index)"></td>
+                <td>
+                    <span class="glyphicon glyphicon-ok" ng-click="ctrl.markAsNotDone($index)" ng-if="task.done"></span>
+                    <span class="glyphicon glyphicon-time" ng-click="ctrl.markAsDone($index)" ng-if="!task.done"></span>
+                </td>
                 <td>{{task.title}}</td>
                 <td>{{task.body}}</td>
-                <td>{{task.deadline}}</td>
+                <td>{{task.deadline | date}}</td>
                 <td>{{task.group}}</td>
                 <td>{{task.priority}}</td>
+                <td><span class="glyphicon glyphicon-edit" ng-click="ctrl.editTask($index)" ng-if="!task.done"></span>
+                </td>
             </tr>
         </table>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <a href class="btn btn-success" ui-sref="app.user.createTask.index">Add task</a>
+            <a href class="btn btn-success" ng-click="ctrl.createNewTask()">Add task</a>
         </div>
     </div>
-
-    <button ng-click="ctrl.createNewTask()">Create</button>
 </div>

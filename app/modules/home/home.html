@@ -1,6 +1,6 @@
 <div>
-    <h1>Home page</h1>
-    <h1 ng-if="ctrl.currentUser.firstName">Hello {{ctrl.currentUser.firstName}}</h1>
+    <h1 ng-if="ctrl.currentUser.firstName">Welcome, {{ctrl.currentUser.firstName}}!</h1>
+    <h1 ng-if="!ctrl.currentUser.firstName">Welcome!</h1>
     <button ng-click="ctrl.showUsers()">show users</button>
     <button ng-click="ctrl.showTasks()">show tasks</button>
     <button ng-click="ctrl.clear()">clear</button>
