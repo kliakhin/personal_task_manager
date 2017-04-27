@@ -20,9 +20,9 @@ export default class ToolsController {
         };
     }
 
+
     apply() {
-        console.log("filter", this.filter);
-        var filteredTasks = angular.copy(this.tasksList);
+        var filteredTasks = this.tasksList;
         var filter = this.filter;
         if (filter.status != null) {
             if (filter.status == "Done") {
@@ -65,7 +65,7 @@ export default class ToolsController {
                 })
             }
         }
-        if (filter.start != null && filter.start != null) {
+        if (filter.start != null) {
             filteredTasks = filteredTasks.filter(function (item) {
                 var d1 = new Date(item.deadline);
                 var d2 = new Date(filter.start);

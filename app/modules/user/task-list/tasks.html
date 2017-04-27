@@ -13,7 +13,7 @@
             <tr ng-repeat="task in ctrl.taskList">
                 <td>
                     <span class="glyphicon glyphicon-ok" ng-click="ctrl.markAsNotDone($index)" ng-if="task.done"></span>
-                    <span class="glyphicon glyphicon-time" ng-click="ctrl.markAsDone($index)" ng-if="!task.done"></span>
+                    <span class="glyphicon glyphicon-asterisk" ng-click="ctrl.markAsDone($index)" ng-if="!task.done"></span>
                 </td>
                 <td>{{task.title}}</td>
                 <td>{{task.body}}</td>
