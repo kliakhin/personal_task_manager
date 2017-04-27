@@ -8,6 +8,7 @@
             <th>Deadline</th>
             <th>Group</th>
             <th>Priority</th>
+            <th>Tools</th>
             </thead>
             <tr ng-repeat="task in ctrl.taskList">
                 <td>
@@ -19,7 +20,8 @@
                 <td>{{task.deadline | date}}</td>
                 <td>{{task.group}}</td>
                 <td>{{task.priority}}</td>
-                <td><span class="glyphicon glyphicon-edit" ng-click="ctrl.editTask($index)" ng-if="!task.done"></span>
+                <td><span class="glyphicon glyphicon-edit" ng-click="ctrl.editTask($index)"></span>
+                    <span class="glyphicon glyphicon-remove" ng-click="ctrl.deleteTask($index)"></span>
                 </td>
             </tr>
         </table>

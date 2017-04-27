@@ -1,1 +1,79 @@
-<h1>TOOLS</h1>
+<div class="container-fluid">
+    <div class="row">
+        <h3>Filters:</h3>
+        <div class="col-xs-9">
+            <form>
+                <div class="form-group">
+                    <label for="done">Select status:</label>
+                    <select ng-model="ctrl.filter.status" class="form-control" id="done" ng-click="ctrl.apply()">
+                        <option ng-repeat="status in ctrl.statuses" value="{{status}}">{{status}}</option>
+                    </select>
+                </div>
+                <!--<div class="form-group">
+                    <input type="text"
+                           ng-model="ctrl.filter.title"
+                           class="form-control"
+                           placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <input type="text"
+                           ng-model="ctrl.filter.body"
+                           class="form-control"
+                           ng-required="false"
+                           placeholder="Body">
+                </div>-->
+                <label for="period">Select period:</label>
+                <div class="form-group" id="period">
+                    <p class="input-group" ng-click="ctrl.apply()">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="ctrl.filter.start"
+                               is-open="ctrl.popupStart.opened"
+                               ng-required="false"
+                               placeholder="Start"
+                               uib-datepicker-popup>
+                        <span class="input-group-btn">
+		            <button type="button" class="btn btn-default" ng-click="ctrl.openPopupStart()">
+		            	<i class="glyphicon glyphicon-calendar"></i>
+		            </button>
+		                </span>
+                    </p>
+                    <p class="input-group" ng-click="ctrl.apply()">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="ctrl.filter.end"
+                               is-open="ctrl.popupEnd.opened"
+                               ng-required="false"
+                               placeholder="End"
+                               uib-datepicker-popup>
+                        <span class="input-group-btn">
+		            <button type="button" class="btn btn-default" ng-click="ctrl.openPopupEnd()">
+		            	<i class="glyphicon glyphicon-calendar"></i>
+		            </button>
+		                </span>
+                    </p>
+                    <button type="button" class="btn btn-default" ng-click="ctrl.apply()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Select group:</label>
+                    <select ng-model="ctrl.filter.group" class="form-control" id="sel1" ng-click="ctrl.apply()">
+                        <option ng-repeat="group in ctrl.groups" value="{{group}}">{{group}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sel2">Select priority:</label>
+                    <select ng-model="ctrl.filter.priority" class="form-control" id="sel2" ng-click="ctrl.apply()">
+                        <option ng-repeat="priority in ctrl.priorities" value="{{priority}}">{{priority}}</option>
+                    </select>
+                </div>
+                <!--<button class="btn btn-primary" ng-click="ctrl.apply()" style="background-color: green">Apply</button>-->
+                <button class="btn btn-primary" ng-click="ctrl.clear()" style="background-color: red">Clear</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

@@ -11,12 +11,16 @@ export default class TaskListController {
         this.taskService = taskService;
 
         $scope.$on('TASK_ADDED', (event)=> {
-            console.log("event1");
+            console.log("added");
             this.taskList = taskService.getTasksList();
         });
-
         $scope.$on('TASK_UPDATED', (event)=> {
-            console.log("event2");
+            this.taskList = taskService.getTasksList();
+        });
+        $scope.$on('TASK_FILTERED', (event)=> {
+            this.taskList = taskService.getTasksList();
+        });
+        $scope.$on('TASK_DELETED', (event)=> {
             this.taskList = taskService.getTasksList();
         });
     }
@@ -27,7 +31,12 @@ export default class TaskListController {
 
     editTask(index) {
         var task = this.taskList[index];
-        this.taskModalService.editTaskModal(angular.copy(task));
+        this.taskModalService.editTaskModal(task);
+    }
+
+    deleteTask(index) {
+        var task = this.taskList[index];
+        this.taskService.deleteTask(task);
     }
 
     markAsDone(index) {
